@@ -26,17 +26,28 @@ with open('contact_lens.csv', 'r') as csvfile:
 
 #encode the original categorical training features into numbers and add to the 4D array X.
 #--> add your Python code here
-mapping = {'Young': 0, 'Presbyopic': 1, 'Prepresbyopic': 2, 'Myope': 0, 'Hypermetrope': 1, 'No': 1, 'Yes': 1, 'Normal': 0, 'Reduced': 1}
-X = [mapping[item] for item in db]
-print(X)
+db_num = []
+
+for col in zip(*db):
+  unique_features = []
+  db_col = []
+
+  for item in col:
+    if item not in unique_features:
+      unique_features.append(item)
+    db_col.append(unique_features.index(item)+1)
+  db_num.append(db_col)
+
+X = db_num[:-1]
+X = [list(row) for row in zip(*X)]
 
 #encode the original categorical training classes into numbers and add to the vector Y.
-#--> addd your Python code here
-# Y =
+#--> add your Python code here
+Y = db_num[-1]
 
 #fitting the depth-2 decision tree to the data using entropy as your impurity measure
-#--> addd your Python code here
-#clf =
+#--> add your Python code here
+clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=2).fit(X, Y)
 
 #plotting decision tree
 tree.plot_tree(clf, feature_names=['Age', 'Spectacle', 'Astigmatism', 'Tear'], class_names=['Yes','No'], filled=True, rounded=True)
