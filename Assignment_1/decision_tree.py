@@ -50,5 +50,6 @@ Y = db_num[-1]
 clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=2).fit(X, Y)
 
 #plotting decision tree
-tree.plot_tree(clf, feature_names=['Age', 'Spectacle', 'Astigmatism', 'Tear'], class_names=['Yes','No'], filled=True, rounded=True)
+tree.plot_tree(clf, feature_names=['Age', 'Spectacle', 'Astigmatism', 'Tear'], class_names=['No','Yes'], filled=True, rounded=True)
 plt.show()
+
