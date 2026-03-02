@@ -13,6 +13,8 @@ from sklearn import tree
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
+import matplotlib.pyplot as plt
+
 dataSets = ['contact_lens_training_1.csv', 'contact_lens_training_2.csv', 'contact_lens_training_3.csv']
 label_encoder = LabelEncoder()
 
@@ -21,12 +23,6 @@ dbTest = []
 df_test = pd.read_csv('contact_lens_test.csv')
 for _, row in df_test.iterrows():
     dbTest.append(row.tolist())
-
-dbTest_num = []
-for col in zip(*dbTest):
-    dbTest_col = label_encoder.fit_transform(col).tolist()
-    dbTest_num.append(dbTest_col)
-dbTest = [list(row) for row in zip(*dbTest_num)]
 
 for ds in dataSets:
 
@@ -68,10 +64,16 @@ for ds in dataSets:
 
        #Read the test data and add this data to dbTest
        #--> add your Python code here
+       dbTest_num = []
+       for col in zip(*dbTest):
+           dbTest_col=label_encoder.fit_transform(col).tolist()
+           dbTest_num.append(dbTest_col)
+       dbTest_new = [list(row) for row in zip(*dbTest_num)]
+
        true_label = 0
        false_label = 0
 
-       for data in dbTest:
+       for data in dbTest_new:
             #Transform the features of the test instances to numbers following the same strategy done during training,
             #and then use the decision tree to make the class prediction. For instance: class_predicted = clf.predict([[3, 1, 2, 1]])[0]
             #where [0] is used to get an integer as the predicted class label so that you can compare it with the true label
