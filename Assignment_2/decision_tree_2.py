@@ -13,8 +13,6 @@ from sklearn import tree
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
-import matplotlib.pyplot as plt
-
 dataSets = ['contact_lens_training_1.csv', 'contact_lens_training_2.csv', 'contact_lens_training_3.csv']
 label_encoder = LabelEncoder()
 
